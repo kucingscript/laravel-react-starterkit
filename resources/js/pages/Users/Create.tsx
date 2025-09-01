@@ -33,6 +33,10 @@ export default function CreateUser() {
             title: 'Users',
             href: '/users',
         },
+        {
+            title: 'Create',
+            href: '/users/create',
+        },
     ];
 
     return (
