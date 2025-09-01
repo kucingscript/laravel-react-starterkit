@@ -1,13 +1,8 @@
 import { cn } from '@/lib/utils';
+import { PageLink } from '@/types';
 import { Link } from '@inertiajs/react';
 import { buttonVariants } from '../ui/button';
 import { Pagination, PaginationContent, PaginationItem } from '../ui/pagination';
-
-interface PageLink {
-    url: string | null;
-    label: string;
-    active: boolean;
-}
 
 interface PaginationProps {
     meta: {

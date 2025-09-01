@@ -15,6 +15,12 @@ export interface NavGroup {
     items: NavItem[];
 }
 
+export interface PageLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;

@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { PageLink, type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, PlusCircle, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import { route } from 'ziggy-js';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,12 +21,6 @@ interface User {
     id: number;
     name: string;
     email: string;
-}
-
-interface PageLink {
-    url: string | null;
-    label: string;
-    active: boolean;
 }
 
 interface UserProps {
@@ -44,7 +39,7 @@ export default function Index({ users }: UserProps) {
     const [userToDelete, setUserToDelete] = useState<User | null>(null);
     const handleDelete = () => {
         if (userToDelete) {
-            router.delete(`/users/${userToDelete.id}`, {
+            router.delete(route('users.destroy', userToDelete.id), {
                 preserveScroll: true,
                 onSuccess: () => setUserToDelete(null),
             });
@@ -65,7 +60,10 @@ export default function Index({ users }: UserProps) {
                             </div>
 
                             <Button asChild>
-                                <Link href="/users/create">Create User</Link>
+                                <Link href={route('users.create')}>
+                                    <PlusCircle className="mr-2 h-4 w-4" />
+                                    Create User
+                                </Link>
                             </Button>
                         </div>
                     </CardHeader>
@@ -84,17 +82,17 @@ export default function Index({ users }: UserProps) {
                                     {users.data.length > 0 ? (
                                         users.data.map((user, index) => (
                                             <TableRow key={user.id}>
-                                                <TableCell className="font-medium">{users.from + index}</TableCell>
+                                                <TableCell>{users.from + index}</TableCell>
                                                 <TableCell>{user.name}</TableCell>
                                                 <TableCell>{user.email}</TableCell>
                                                 <TableCell className="text-right">
                                                     <div className="flex items-center justify-end gap-2">
-                                                        <Button variant="ghost" size="icon" asChild>
-                                                            <Link href={`/users/${user.id}/edit`}>
+                                                        <Button variant="outline" size="icon" asChild>
+                                                            <Link href={route('users.edit', user.id)}>
                                                                 <Pencil className="h-4 w-4" />
                                                             </Link>
                                                         </Button>
-                                                        <Button variant="ghost" size="icon" onClick={() => setUserToDelete(user)}>
+                                                        <Button variant="outline" size="icon" onClick={() => setUserToDelete(user)}>
                                                             <Trash2 className="h-4 w-4 text-destructive" />
                                                         </Button>
                                                     </div>
