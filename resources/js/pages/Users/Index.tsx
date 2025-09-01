@@ -13,11 +13,11 @@ import { route } from 'ziggy-js';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: route('dashboard'),
     },
     {
         title: 'Users',
-        href: '/users',
+        href: route('users.index'),
     },
 ];
 

@@ -27,15 +27,15 @@ export default function CreateUser() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dashboard',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Users',
-            href: '/users',
+            href: route('users.index'),
         },
         {
             title: 'Create',
-            href: '/users/create',
+            href: route('users.create'),
         },
     ];
 
